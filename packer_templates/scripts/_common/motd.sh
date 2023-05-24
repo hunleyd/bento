@@ -1,21 +1,13 @@
 #!/bin/sh -eux
 
-bento='
-This system is built by the Bento project by Chef Software
-More information can be found at https://github.com/chef/bento'
+cat << 'BENTO' >> /etc/motd
 
-if [ -d /etc/update-motd.d ]; then
-    MOTD_CONFIG='/etc/update-motd.d/99-bento'
+This system is built by the Crunchy Postgres Automation project at
+                            _               _       _
+  ___ _ __ _   _ _ __   ___| |__  _   _  __| | __ _| |_ __ _
+ / __| '__| | | | '_ \ / __| '_ \| | | |/ _` |/ _` | __/ _` |
+| (__| |  | |_| | | | | (__| | | | |_| | (_| | (_| | || (_| |
+ \___|_|   \__,_|_| |_|\___|_| |_|\__, |\__,_|\__,_|\__\__,_|
+                                  |___/
 
-    cat >> "$MOTD_CONFIG" <<BENTO
-#!/bin/sh
-
-cat <<'EOF'
-$bento
-EOF
 BENTO
-
-    chmod 0755 "$MOTD_CONFIG"
-else
-    echo "$bento" >> /etc/motd
-fi
