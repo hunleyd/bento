@@ -2,6 +2,9 @@
 on:
   workflow_call:
 
+env:
+  PACKER_GITHUB_API_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
 jobs:
   x86_64:
     runs-on: [self-hosted, X64, qemu]
@@ -52,24 +55,27 @@ jobs:
         run: Invoke-RestMethod -Method Head -Verbose -Uri $(Get-Content os_pkrvars/$('${{ matrix.os }}'.split('-')[0])/${{ matrix.os }}-x86_64.pkrvars.hcl | ConvertFrom-StringData).iso_url.Trim('"')
       - name: Download virtio-win.iso
         run: curl https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.229-1/virtio-win.iso -o packer_templates/win_answer_files/virtio-win.iso
-      - name: Setup Packer
-        uses: hashicorp/setup-packer@main
-        with:
-          version: latest
+#      - name: Setup Packer
+#        uses: hashicorp/setup-packer@main
+#        with:
+#          version: latest
       - name: Packer Init
-        env:
-          PACKER_GITHUB_API_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: packer init -upgrade packer_templates
       - name: Packer FMT
         run: if packer fmt -check -recursive .; then exit 0; else echo "Some packer files need to be formatted, run 'packer fmt -recursive .' to fix"; exit 1; fi
       - name: Packer Validate
         run: packer validate -var-file=os_pkrvars/$(echo ${{ matrix.os }} | cut -d "-" -f 1)/"${{ matrix.os }}-x86_64.pkrvars.hcl" packer_templates
       - name: Packer build
-        run: packer build -timestamp-ui -only=${{ matrix.provider }}.vm -var "qemu_accelerator=hvf" -var-file=os_pkrvars/$(echo ${{ matrix.os }} | cut -d "-" -f 1)/"${{ matrix.os }}-x86_64.pkrvars.hcl" packer_templates
+#        run: packer build -timestamp-ui -only=${{ matrix.provider }}.vm -var "qemu_accelerator=hvf" -var-file=os_pkrvars/$(echo ${{ matrix.os }} | cut -d "-" -f 1)/"${{ matrix.os }}-x86_64.pkrvars.hcl" packer_templates
+        run: |
+          eval "$(chef shell-init bash)"
+          bento build -o ${{ matrix.provider }}.vm os_pkrvars/$(echo ${{ matrix.os }} | cut -d "-" -f 1)/"${{ matrix.os }}-x86_64.pkrvars.hcl"
+          ls -alh builds
       - name: Upload build artifact
         uses: actions/upload-artifact@main
         with:
-          name: "${{ matrix.os }}-qemu-x86_64.box"
+          name: "${{ matrix.os }}-qemu-x86_64"
           path: |
-            builds/*.box
+            builds
+            !builds/uploaded/*
           retention-days: 10

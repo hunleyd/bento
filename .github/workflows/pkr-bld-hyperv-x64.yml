@@ -2,6 +2,9 @@
 on:
   workflow_call:
 
+env:
+  PACKER_GITHUB_API_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
 jobs:
   x86_64:
     runs-on: [self-hosted, X64, hyperv]
@@ -52,13 +55,11 @@ jobs:
       - name: iso-availability
         shell: pwsh
         run: Invoke-RestMethod -Method Head -Verbose -Uri $(Get-Content os_pkrvars/$('${{ matrix.os }}'.split('-')[0])/${{ matrix.os }}-x86_64.pkrvars.hcl | ConvertFrom-StringData).iso_url.Trim('"')
-      - name: Setup Packer
-        uses: hashicorp/setup-packer@main
-        with:
-          version: latest
+#      - name: Setup Packer
+#        uses: hashicorp/setup-packer@main
+#        with:
+#          version: latest
       - name: Packer Init
-        env:
-          PACKER_GITHUB_API_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: packer init -upgrade packer_templates
       - name: Packer FMT
         run: packer fmt -check -recursive .
@@ -77,7 +78,7 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@main
         with:
-          name: "${{ matrix.os }}-hyperv-x86_64.box"
+          name: "${{ matrix.os }}-hyperv-x86_64"
           path: |
             builds/*.box
           retention-days: 10
