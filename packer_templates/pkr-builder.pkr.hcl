@@ -140,8 +140,8 @@ locals {
               "${var.os_name}-${substr(var.os_version, 0, 1)}" == "rhel-7" ||
               "${var.os_name}-${substr(var.os_version, 0, 1)}" == "scientificlinux-7" ||
               "${var.os_name}-${substr(var.os_version, 0, 1)}" == "springdalelinux-7" ? [
-                "${path.root}/scripts/_common/fix_clock.sh",
                 "${path.root}/scripts/_common/register_rhsm.sh",
+                "${path.root}/scripts/_common/fix_clock.sh",
                 "${path.root}/scripts/rhel/update_yum.sh",
                 "${path.root}/scripts/_common/motd.sh",
                 "${path.root}/scripts/_common/sshd.sh",
@@ -154,8 +154,8 @@ locals {
                 "${path.root}/scripts/_common/deregister_rhsm.sh",
                 "${path.root}/scripts/_common/minimize.sh"
                 ] : [
-                "${path.root}/scripts/_common/fix_clock.sh",
                 "${path.root}/scripts/_common/register_rhsm.sh",
+                "${path.root}/scripts/_common/fix_clock.sh",
                 "${path.root}/scripts/rhel/update_dnf.sh",
                 "${path.root}/scripts/_common/motd.sh",
                 "${path.root}/scripts/_common/sshd.sh",
