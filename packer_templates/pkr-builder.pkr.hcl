@@ -64,17 +64,10 @@ locals {
           "${path.root}/scripts/freebsd/cleanup_freebsd.sh",
           "${path.root}/scripts/freebsd/minimize_freebsd.sh"
           ] : (
-<<<<<<< HEAD
-          var.os_name == "ubuntu" ||
-          var.os_name == "debian" ? [
-            "${path.root}/scripts/_common/fix_clock.sh",
-            "${path.root}/scripts/${var.os_name}/update_${var.os_name}.sh",
-=======
           var.os_name == "opensuse" ||
           var.os_name == "sles" ? [
             "${path.root}/scripts/suse/repositories_suse.sh",
             "${path.root}/scripts/suse/update_suse.sh",
->>>>>>> e3da65274b1275a51bb64c202335c4d84db8ae66
             "${path.root}/scripts/_common/motd.sh",
             "${path.root}/scripts/_common/sshd.sh",
             "${path.root}/scripts/_common/vagrant.sh",
@@ -89,18 +82,10 @@ locals {
             "${path.root}/scripts/suse/cleanup_suse.sh",
             "${path.root}/scripts/_common/minimize.sh"
             ] : (
-<<<<<<< HEAD
-            var.os_name == "fedora" ? [
-              "${path.root}/scripts/_common/fix_clock.sh",
-              "${path.root}/scripts/fedora/networking_fedora.sh",
-              "${path.root}/scripts/fedora/update_dnf.sh",
-              "${path.root}/scripts/fedora/build-tools_fedora.sh",
-              "${path.root}/scripts/fedora/install-supporting-packages_fedora.sh",
-=======
             var.os_name == "ubuntu" ||
             var.os_name == "debian" ? [
+              "${path.root}/scripts/_common/fix_clock.sh",
               "${path.root}/scripts/${var.os_name}/update_${var.os_name}.sh",
->>>>>>> e3da65274b1275a51bb64c202335c4d84db8ae66
               "${path.root}/scripts/_common/motd.sh",
               "${path.root}/scripts/_common/sshd.sh",
               "${path.root}/scripts/${var.os_name}/networking_${var.os_name}.sh",
@@ -115,49 +100,22 @@ locals {
               "${path.root}/scripts/_common/parallels_post_cleanup_debian_ubuntu.sh",
               "${path.root}/scripts/_common/minimize.sh"
               ] : (
-<<<<<<< HEAD
-              "${var.os_name}-${substr(var.os_version, 0, 1)}" == "amazonlinux-2" ||
-              "${var.os_name}-${substr(var.os_version, 0, 1)}" == "centos-7" ||
-              "${var.os_name}-${substr(var.os_version, 0, 1)}" == "oracle-7" ||
-              "${var.os_name}-${substr(var.os_version, 0, 1)}" == "rhel-7" ||
-              "${var.os_name}-${substr(var.os_version, 0, 1)}" == "scientificlinux-7" ||
-              "${var.os_name}-${substr(var.os_version, 0, 1)}" == "springdalelinux-7" ? [
+              var.os_name == "fedora" ? [
                 "${path.root}/scripts/_common/register_rhsm.sh",
                 "${path.root}/scripts/_common/fix_clock.sh",
-                "${path.root}/scripts/rhel/update_yum.sh",
-=======
-              var.os_name == "fedora" ? [
                 "${path.root}/scripts/fedora/networking_fedora.sh",
                 "${path.root}/scripts/fedora/update_dnf.sh",
                 "${path.root}/scripts/fedora/build-tools_fedora.sh",
                 "${path.root}/scripts/fedora/install-supporting-packages_fedora.sh",
->>>>>>> e3da65274b1275a51bb64c202335c4d84db8ae66
                 "${path.root}/scripts/_common/motd.sh",
                 "${path.root}/scripts/_common/sshd.sh",
                 "${path.root}/scripts/_common/virtualbox.sh",
                 "${path.root}/scripts/_common/vmware_fedora.sh",
                 "${path.root}/scripts/_common/parallels-rhel.sh",
-<<<<<<< HEAD
-                "${path.root}/scripts/rhel/cleanup_yum.sh",
-                "${path.root}/scripts/_common/deregister_rhsm.sh",
-                "${path.root}/scripts/_common/minimize.sh"
-                ] : [
-                "${path.root}/scripts/_common/register_rhsm.sh",
-                "${path.root}/scripts/_common/fix_clock.sh",
-                "${path.root}/scripts/rhel/update_dnf.sh",
-                "${path.root}/scripts/_common/motd.sh",
-                "${path.root}/scripts/_common/sshd.sh",
-                "${path.root}/scripts/_common/vagrant.sh",
-                "${path.root}/scripts/_common/virtualbox.sh",
-                "${path.root}/scripts/_common/vmware_rhel.sh",
-                "${path.root}/scripts/_common/parallels-rhel.sh",
-                "${path.root}/scripts/rhel/cleanup_dnf.sh",
-                "${path.root}/scripts/_common/deregister_rhsm.sh",
-=======
                 "${path.root}/scripts/_common/vagrant.sh",
                 "${path.root}/scripts/fedora/real-tmp_fedora.sh",
                 "${path.root}/scripts/fedora/cleanup_dnf.sh",
->>>>>>> e3da65274b1275a51bb64c202335c4d84db8ae66
+                "${path.root}/scripts/_common/deregister_rhsm.sh",
                 "${path.root}/scripts/_common/minimize.sh"
                 ] : (
                 "${var.os_name}-${substr(var.os_version, 0, 1)}" == "amazonlinux-2" ||
@@ -166,6 +124,8 @@ locals {
                 "${var.os_name}-${substr(var.os_version, 0, 1)}" == "rhel-7" ||
                 "${var.os_name}-${substr(var.os_version, 0, 1)}" == "scientificlinux-7" ||
                 "${var.os_name}-${substr(var.os_version, 0, 1)}" == "springdalelinux-7" ? [
+                  "${path.root}/scripts/_common/register_rhsm.sh",
+                  "${path.root}/scripts/_common/fix_clock.sh",
                   "${path.root}/scripts/rhel/update_yum.sh",
                   "${path.root}/scripts/_common/motd.sh",
                   "${path.root}/scripts/_common/sshd.sh",
