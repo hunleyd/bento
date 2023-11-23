@@ -137,6 +137,8 @@ locals {
                   "${path.root}/scripts/rhel/cleanup_yum.sh",
                   "${path.root}/scripts/_common/minimize.sh"
                   ] : [
+                  "${path.root}/scripts/_common/register_rhsm.sh",
+                  "${path.root}/scripts/_common/fix_clock.sh",
                   "${path.root}/scripts/rhel/update_dnf.sh",
                   "${path.root}/scripts/_common/motd.sh",
                   "${path.root}/scripts/_common/sshd.sh",
