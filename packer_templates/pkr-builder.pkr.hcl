@@ -118,7 +118,7 @@ locals {
                 "${path.root}/scripts/_common/deregister_rhsm.sh",
                 "${path.root}/scripts/_common/minimize.sh"
                 ] : (
-                "${var.os_name}-${substr(var.os_version, 0, 1)}" == "amazonlinux-2" ||
+                "${var.os_name}-${var.os_version}" == "amazonlinux-2" ||
                 "${var.os_name}-${substr(var.os_version, 0, 1)}" == "centos-7" ||
                 "${var.os_name}-${substr(var.os_version, 0, 1)}" == "oracle-7" ||
                 "${var.os_name}-${substr(var.os_version, 0, 1)}" == "rhel-7" ? [
