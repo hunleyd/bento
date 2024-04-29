@@ -1,5 +1,7 @@
 #!/bin/sh -eux
 
+touch /etc/motd
+chmod 0777 /etc/motd
 cat << 'BENTO' >> /etc/motd
 
 This system is built by the Crunchy Postgres Automation project at
@@ -11,3 +13,4 @@ This system is built by the Crunchy Postgres Automation project at
                                   |___/
 
 BENTO
+chmod 0755 /etc/motd
