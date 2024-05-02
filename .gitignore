@@ -1,5 +1,6 @@
 .bundle/
 **/builds/
+**/build_files/
 *.iso
 *.box
 *.ova
@@ -17,6 +18,7 @@ bootstrap.sh
 Berksfile.lock
 *.variables.json
 /builds/
+/build_files/
 .kitchen
 .kitchen.yml
 kitchen.yml
