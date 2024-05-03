@@ -145,10 +145,10 @@ locals {
                     ] : [
                     "${path.root}/scripts/_common/register_rhsm.sh",
                     "${path.root}/scripts/_common/fix_clock.sh",
-                    "${path.root}/scripts/rhel/update_dnf.sh",
                     "${path.root}/scripts/_common/motd.sh",
                     "${path.root}/scripts/_common/sshd.sh",
                     "${path.root}/scripts/_common/vagrant.sh",
+                    "${path.root}/scripts/rhel/update_dnf.sh",
                     "${path.root}/scripts/_common/virtualbox.sh",
                     "${path.root}/scripts/_common/vmware_rhel.sh",
                     "${path.root}/scripts/_common/parallels-rhel.sh",
