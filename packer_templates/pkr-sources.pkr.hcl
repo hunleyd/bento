@@ -35,7 +35,11 @@ locals {
   ) : var.parallels_prlctl
 
   # qemu
-  qemu_binary = var.qemu_binary == null ? "qemu-system-${var.os_arch}" : var.qemu_binary
+  qemu_binary  = var.qemu_binary == null ? "qemu-system-${var.os_arch}" : var.qemu_binary
+  qemu_display = var.qemu_display == null ? "none" : var.qemu_display
+  qemu_use_default_display = var.qemu_use_default_display == null ? (
+    var.os_arch == "aarch64" ? true : false
+  ) : var.qemu_use_default_display
   qemu_machine_type = var.qemu_machine_type == null ? (
     var.os_arch == "aarch64" ? "virt" : "q35"
   ) : var.qemu_machine_type
@@ -43,10 +47,12 @@ locals {
     var.is_windows ? [
       ["-drive", "file=${path.root}/../builds/iso/virtio-win.iso,media=cdrom,index=3"],
       ["-drive", "file=${var.iso_url},media=cdrom,index=2"],
-      ["-drive", "file=${path.root}/../builds/build_files/packer-${var.os_name}-${var.os_version}-${var.os_arch}-qemu/{{ .Name }},if=virtio,cache=writeback,discard=ignore,format=qcow2,index=1"],
+      ["-drive", "file=${path.root}/../builds/build_files/packer-${var.os_name}-${var.os_version}-${var.os_arch}-qemu/{{ .Name }},if=virtio,cache=writeback,discard=ignore,format=${var.qemu_format},index=1"],
       ] : (
       var.os_arch == "aarch64" ? [
         ["-boot", "strict=off"]
+        # ["-cpu", "host"],
+        # ["-monitor", "stdio"]
       ] : null
     )
   ) : var.qemuargs
@@ -209,17 +215,18 @@ source "parallels-iso" "vm" {
 }
 source "qemu" "vm" {
   # QEMU specific options
-  accelerator       = var.qemu_accelerator
-  display           = var.headless ? "none" : var.qemu_display
-  disk_image        = var.qemu_disk_image
-  efi_boot          = var.qemu_efi_boot
-  efi_firmware_code = var.qemu_efi_firmware_code
-  efi_firmware_vars = var.qemu_efi_firmware_vars
-  efi_drop_efivars  = var.qemu_efi_drop_efivars
-  format            = var.qemu_format
-  machine_type      = local.qemu_machine_type
-  qemu_binary       = local.qemu_binary
-  qemuargs          = local.qemuargs
+  accelerator         = var.qemu_accelerator
+  display             = local.qemu_display
+  use_default_display = local.qemu_use_default_display
+  disk_image          = var.qemu_disk_image
+  efi_boot            = var.qemu_efi_boot
+  efi_firmware_code   = var.qemu_efi_firmware_code
+  efi_firmware_vars   = var.qemu_efi_firmware_vars
+  efi_drop_efivars    = var.qemu_efi_drop_efivars
+  format              = var.qemu_format
+  machine_type        = local.qemu_machine_type
+  qemu_binary         = local.qemu_binary
+  qemuargs            = local.qemuargs
   # Source block common options
   boot_command     = var.boot_command
   boot_wait        = var.qemu_boot_wait == null ? local.default_boot_wait : var.qemu_boot_wait

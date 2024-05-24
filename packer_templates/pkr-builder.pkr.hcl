@@ -127,9 +127,6 @@ locals {
                   "${path.root}/scripts/_common/minimize.sh"
                   ] : (
                   "${var.os_name}-${var.os_version}" == "amazonlinux-2" ||
-                  "${var.os_name}-${substr(var.os_version, 0, 1)}" == "centos-7" ||
-                  "${var.os_name}-${substr(var.os_version, 0, 1)}" == "oraclelinux-7" ||
-                  "${var.os_name}-${substr(var.os_version, 0, 1)}" == "rhel-7" ? [
                     "${path.root}/scripts/_common/register_rhsm.sh",
                     "${path.root}/scripts/_common/fix_clock.sh",
                     "${path.root}/scripts/rhel/update_yum.sh",
