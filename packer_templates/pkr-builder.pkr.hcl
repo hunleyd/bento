@@ -146,9 +146,9 @@ locals {
                     "${path.root}/scripts/_common/sshd.sh",
                     "${path.root}/scripts/_common/vagrant.sh",
                     "${path.root}/scripts/rhel/update_dnf.sh",
-                    "${path.root}/scripts/_common/virtualbox.sh",
                     "${path.root}/scripts/_common/vmware_rhel.sh",
                     "${path.root}/scripts/_common/parallels-rhel.sh",
+                    "${path.root}/scripts/_common/virtualbox.sh",
                     "${path.root}/scripts/rhel/cleanup_dnf.sh",
                     "${path.root}/scripts/_common/minimize.sh"
                   ]
