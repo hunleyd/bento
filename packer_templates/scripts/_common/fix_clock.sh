@@ -6,7 +6,7 @@ if [ -f /etc/os-release ]; then
     . /etc/os-release
     echo "Installing chrony"
     if [ "${ID}" = 'ubuntu' ]; then
-        apt -y install chrony
+        apt -y install chrony util-liinux-extra
     else
         yum -y install chrony
     fi
@@ -15,4 +15,8 @@ if [ -f /etc/os-release ]; then
     sed -i 's/1\.0/0\.1/' /etc/chrony.conf || sed -i 's/1\.0/0\.1/' /etc/chrony/chrony.conf
     echo "Starting chrony"
     systemctl enable --now chronyd || systemctl enable --now chrony
+    echo "Sync hwclock to system clock"
+    hwclock --hctosys
+    echo "Adjust the clock"
+    chronyc -a makestep
 fi

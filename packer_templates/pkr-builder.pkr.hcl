@@ -94,6 +94,8 @@ locals {
               var.os_name == "ubuntu" ||
               var.os_name == "debian" ? [
                 "${path.root}/scripts/_common/fix_clock.sh",
+                "${path.root}/scripts/_common/systemd_less.sh",
+                "${path.root}/scripts/_common/setup_tuned.sh",
                 "${path.root}/scripts/${var.os_name}/update_${var.os_name}.sh",
                 "${path.root}/scripts/_common/motd.sh",
                 "${path.root}/scripts/_common/sshd.sh",
@@ -112,6 +114,8 @@ locals {
                 var.os_name == "fedora" ? [
                   "${path.root}/scripts/_common/register_rhsm.sh",
                   "${path.root}/scripts/_common/fix_clock.sh",
+                  "${path.root}/scripts/_common/systemd_less.sh",
+                  "${path.root}/scripts/_common/setup_tuned.sh",
                   "${path.root}/scripts/fedora/networking_fedora.sh",
                   "${path.root}/scripts/fedora/update_dnf.sh",
                   "${path.root}/scripts/fedora/build-tools_fedora.sh",
@@ -129,6 +133,8 @@ locals {
                   "${var.os_name}-${var.os_version}" == "amazonlinux-2" ? [
                     "${path.root}/scripts/_common/register_rhsm.sh",
                     "${path.root}/scripts/_common/fix_clock.sh",
+                    "${path.root}/scripts/_common/systemd_less.sh",
+                    "${path.root}/scripts/_common/setup_tuned.sh",
                     "${path.root}/scripts/rhel/update_yum.sh",
                     "${path.root}/scripts/_common/motd.sh",
                     "${path.root}/scripts/_common/sshd.sh",
@@ -142,13 +148,15 @@ locals {
                     ] : [
                     "${path.root}/scripts/_common/register_rhsm.sh",
                     "${path.root}/scripts/_common/fix_clock.sh",
+                    "${path.root}/scripts/_common/systemd_less.sh",
+                    "${path.root}/scripts/_common/setup_tuned.sh",
                     "${path.root}/scripts/_common/motd.sh",
                     "${path.root}/scripts/_common/sshd.sh",
                     "${path.root}/scripts/_common/vagrant.sh",
                     "${path.root}/scripts/rhel/update_dnf.sh",
+                    "${path.root}/scripts/_common/virtualbox.sh",
                     "${path.root}/scripts/_common/vmware_rhel.sh",
                     "${path.root}/scripts/_common/parallels-rhel.sh",
-                    "${path.root}/scripts/_common/virtualbox.sh",
                     "${path.root}/scripts/rhel/cleanup_dnf.sh",
                     "${path.root}/scripts/_common/minimize.sh"
                   ]
