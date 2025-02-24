@@ -12,3 +12,4 @@ if [ -f /etc/os-release ]; then
     systemctl enable --now tuned
     echo "Adjusting tuned config"
     tuned-adm profile virtual-guest
+fi
