@@ -6,7 +6,8 @@ if [ -f /etc/os-release ]; then
     . /etc/os-release
     echo "Installing chrony"
     if [ "${ID}" = 'ubuntu' ]; then
-        apt -y install chrony util-liinux-extra
+        apt -y install chrony
+        apt -y install util-linux-extra || true
     else
         yum -y install chrony
     fi
