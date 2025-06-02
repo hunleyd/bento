@@ -129,7 +129,6 @@ locals {
                   "${path.root}/scripts/fedora/real-tmp_fedora.sh",
                   "${path.root}/scripts/fedora/cleanup_dnf.sh",
                   "${path.root}/scripts/_common/minimize.sh"
-<<<<<<< HEAD
                   ] : (
                   "${var.os_name}-${var.os_version}" == "amazonlinux-2" ? [
                     "${path.root}/scripts/_common/register_rhsm.sh",
@@ -142,8 +141,8 @@ locals {
                     "${path.root}/scripts/rhel/networking_rhel7.sh",
                     "${path.root}/scripts/_common/vagrant.sh",
                     "${path.root}/scripts/_common/virtualbox.sh",
-                    "${path.root}/scripts/_common/vmware_rhel.sh",
-                    "${path.root}/scripts/_common/parallels-rhel.sh",
+                    "${path.root}/scripts/_common/vmware.sh",
+                    "${path.root}/scripts/_common/parallelsl.sh",
                     "${path.root}/scripts/rhel/cleanup_yum.sh",
                     "${path.root}/scripts/_common/minimize.sh"
                     ] : [
@@ -156,8 +155,8 @@ locals {
                     "${path.root}/scripts/_common/vagrant.sh",
                     "${path.root}/scripts/rhel/update_dnf.sh",
                     "${path.root}/scripts/_common/virtualbox.sh",
-                    "${path.root}/scripts/_common/vmware_rhel.sh",
-                    "${path.root}/scripts/_common/parallels-rhel.sh",
+                    "${path.root}/scripts/_common/vmware.sh",
+                    "${path.root}/scripts/_common/parallels.sh",
                     "${path.root}/scripts/rhel/cleanup_dnf.sh",
                     "${path.root}/scripts/_common/minimize.sh"
                   ]
